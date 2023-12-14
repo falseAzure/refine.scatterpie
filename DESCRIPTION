@@ -1,6 +1,6 @@
 Type: Package
 Package: refine.scatterpie
-Title: Addition to the Initial Scatterpie Package
+Title: Addition to the Scatterpie Package
 Version: 0.1.0
 Description: Adds neat funtionality to the scatterpie package.  This
     functionality includes the ability to plot the scatterpies in

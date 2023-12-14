@@ -1,0 +1,19 @@
+Type: Package
+Package: refine.scatterpie
+Title: Addition to the Initial Scatterpie Package
+Version: 0.1.0
+Description: Adds neat funtionality to the scatterpie package.  This
+    functionality includes the ability to plot the scatterpies in
+    accordance with the underlying map.
+License: Proprietary
+Depends:
+    ggplot2 (>= 3.4.0),
+    scatterpie (>= 0.2.1),
+    sf (>= 1.0)
+Imports:
+Author@R: person("Gabelberger", "Fabian", email =
+    "fabian.gabelberger@wifo.ac.at", role = c("cre", "aut"))
+Encoding: UTF-8
+LazyData: true
+RoxyGen: list(markdown = TRUE)
+RoxygenNote: 7.2.3

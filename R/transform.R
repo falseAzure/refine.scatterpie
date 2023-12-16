@@ -147,7 +147,7 @@ get_centroids <- function(sf_object) {
 #'
 #' @description
 #' This function transforms a variable in a data frame based on the area of spatial features.
-#' It then adds the transformed variable as a new column to the data frame.
+#' It then adds the transformed variable as a new column (r) to the data frame.
 #'
 #' @param data A data frame containing the variable to be transformed.
 #' @param var A string representing the name of the variable in the data frame to be transformed.
@@ -169,9 +169,45 @@ transform_data <- function(data, var, sf_object, ratio = 0.08, area = TRUE) {
     transformed_data <- transform_values(data[[var]], sf_object = sf_object, ratio = ratio, area = area, return_multiplier = TRUE)
     multiplier <- transformed_data$multiplier
     radius <- transformed_data$values
-    data.map <- data %>%
+    data_map <- data %>%
         mutate(r = radius)
-    data.map <- data.map %>%
+    data_map <- data_map %>%
         mutate(delta = 0)
-    return(list(data = data.map, multiplier = multiplier))
+    return(list(data = data_map, multiplier = multiplier))
+}
+
+
+
+#' @title Transform Spatial Data
+#'
+#' @description
+#' This function calculates the centroids of the spatial features in a given spatial object and
+#' transforms a variable based on the area of spatial features.
+#' It then adds the transformed variable as a new column (r) to the data frame.
+#'
+#' @details
+#' Convenience function that wraps \code{\link{get_centroids}} and \code{\link{transform_data}}.
+#' It returns a data frame, since \pkg[scatterpie] uses data frames as input.
+#'
+#' @param sf_object A spatial object of class sf, sfc or sfg.
+#' @param var A string representing the name of the variable in the spatial object to be transformed.
+#' @param ratio A numeric value representing the ratio used for scaling (default is 0.08).
+#' @param area A logical value indicating whether the transformation should be based on area (default is TRUE).
+#'
+#' @return A list containing the data frame with the transformed variable and the multiplier used for the transformation.
+#'
+#' @examples
+#' \dontrun{
+#' sf_object <- sf::st_read('path_to_your_shapefile.shp')
+#' transformed_data <- transform_data(data, 'your_variable', sf_object, ratio = 0.1, area = TRUE)
+#' }
+#' @export
+transform_sf <- function(sf_object, var, ratio = 0.08, area = TRUE) {
+  data <- get_centroids(sf_object = sf_object)
+
+  transformed_data <- transform_data(data = data, var = var, sf_object = sf_object, ratio = ratio, area = area)
+  data_map <- transformed_data$data
+  multiplier <- transformed_data$multiplier
+
+  return(list(data = data_map, multiplier = multiplier))
 }

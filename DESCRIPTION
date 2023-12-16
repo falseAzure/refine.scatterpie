@@ -1,7 +1,7 @@
 Type: Package
 Package: refine.scatterpie
 Title: Addition to the Scatterpie Package
-Version: 0.1.0
+Version: 0.2.0
 Description: Adds neat funtionality to the scatterpie package.  This
     functionality includes the ability to plot the scatterpies in
     accordance with the underlying map.
@@ -11,6 +11,7 @@ Depends:
     scatterpie (>= 0.2.1),
     sf (>= 1.0)
 Imports:
+    dplyr(>= 1.0.0)
 Author@R: person("Gabelberger", "Fabian", email =
     "fabian.gabelberger@wifo.ac.at", role = c("cre", "aut"))
 Encoding: UTF-8

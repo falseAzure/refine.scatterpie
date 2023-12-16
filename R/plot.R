@@ -35,9 +35,7 @@ plot_scatterpie <- function(sf_object, var, cols=NULL, legend_name="Typ", ratio=
     cols <- c(var, "delta")
   }
 
-  data <- get_centroids(sf_object = sf_object)
-
-  transformed_data <- transform_data(data = data, var = var, sf_object = sf_object, ratio = ratio, area = area)
+  transformed_data <- transform_sf(sf_object = sf_object, var = var, ratio = ratio, area = area)
   data_map <- transformed_data$data
   multiplier <- transformed_data$multiplier
 
@@ -61,7 +59,6 @@ plot_scatterpie <- function(sf_object, var, cols=NULL, legend_name="Typ", ratio=
       cols = cols, color = color.pie, alpha = alpha.pie, legend_name = legend_name_new, sorted_by_radius = TRUE
     ) +
   geom_scatterpie_legend(
-    # radius = transform_values(values = data_map$r, sf_object = sf_object, ratio = ratio, area = area),
     radius = data_map$r,
     labeller = function(x) transform_labeller(x, multiplier, area),
     n = legend.n, x = legend.x, y = legend.y
